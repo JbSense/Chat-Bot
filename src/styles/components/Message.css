@@ -1,0 +1,40 @@
+.message {
+    width: 100%;
+    height: auto;
+
+    /* margin: .5rem 0rem; */
+
+    display: grid;
+}
+
+.message p {
+    max-width: 450px;
+    padding: .5rem 1.5rem;
+    font-size: 1.6rem;
+    word-wrap: break-word;
+    color: #fff;
+}
+
+.client {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #2984ff;
+
+    justify-self: flex-end;
+}
+
+.bot {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #282a2e;
+
+    justify-self: flex-start;
+}
+
+.background-blue {
+    background-color: #2984ff;
+}
+
+.background-high-gray {
+    background-color: #282a2e;
+}
