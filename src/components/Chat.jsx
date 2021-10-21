@@ -53,6 +53,7 @@ class Chat extends Component {
     start() {
         if(this.state.new_message === true ) { 
             this.updateMessages()
+            this.getSystemInformations()
             this.setState({ new_message: false })
         }
     }
@@ -68,6 +69,13 @@ class Chat extends Component {
             }
 
             this.setState({ messages: messages })
+        })
+    }
+
+    getSystemInformations() {
+        this.api('get', 'get-system').then(data => {
+            const soComplete = `${data.data.so.plataform} ${data.data.so.architecture[0]} ${data.data.so.architecture[1]}`
+            console.log(soComplete)
         })
     }
 
@@ -131,9 +139,7 @@ class Chat extends Component {
                 messages.unshift(data.data[x])
             }
 
-            setTimeout(() => {
-                this.setState({ messages: messages })
-            }, 500)
+            this.setState({ messages: messages })
             this.clear()
         })
         
