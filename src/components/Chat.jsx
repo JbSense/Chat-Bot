@@ -12,13 +12,14 @@ import Writer from './Writer';
 
 // Estado inicial da aplicação
 const initialState = {
-    start: true,
+    new_message: true,
     styles: {
         background_color: '',
         me_color: '',
         bot_color: ''
     },
-    messages: []
+    messages: [],
+    writing: ''
 }
 
 class Chat extends Component {
@@ -27,16 +28,6 @@ class Chat extends Component {
      * Seta o estado inicial 
      */
     state = { ...initialState }
-
-    /**
-     * Chamada sempre que a página é carrega
-     */
-    start() {
-        if(this.state.start === true) {
-            this.updateMessages()
-            this.setState({ start: false })
-        }
-    }
 
     /**
      * Função usada para consumir o backend
@@ -57,28 +48,26 @@ class Chat extends Component {
     }
 
     /**
+     * Chamada sempre que a página é carrega
+     */
+    start() {
+        if(this.state.new_message === true ) { 
+            this.updateMessages()
+            this.setState({ new_message: false })
+        }
+    }
+
+    /**
      * Chama a função api para obter as mensagens salvas e seta no state.messages
      */
     updateMessages() {
-        this.api('get', 'get-history').then(data => {
+        this.api('get', 'get-messages').then(data => {
             const messages = []
             for(let x in data.data) {
                 messages.unshift(data.data[x])
             }
 
             this.setState({ messages: messages })
-        })
-
-    }
-
-    /**
-     * Acessa o backend para obter os estilos das mensagens
-     * 
-     * @return a mensagem com os estilos
-     */
-    getStyles() {
-        this.api('get', 'get-styles').then(data => {
-            
         })
     }
 
@@ -101,12 +90,63 @@ class Chat extends Component {
     }
 
     /**
+     * Adiciona o que está sendo escrito no state.writing
+     *
+     * @param {event} event - recebe o evento que chamou a function
+     */
+     writing(event) {
+        this.setState({ writing: event.target.value })
+    }
+
+    /*
+     * Limpa o writing
+     */
+    clear() {
+        this.setState({ writing: "" })
+    }
+
+    /**
+     * Valida se a tecla pressionada foi (Enter) 
+     * 
+     * @param {event} event - recebe o evento, tecla que foi pressionada
+     * 
+     * Caso a validação retorne true, chama a funtion sendMessage
+     */
+    enter(event) {
+        if(event.code === "Enter") this.sendMessage()
+    }
+
+    /**
+     * Salva o state.writing como uma nova mensagem no banco usando formdata 
+     */
+    sendMessage() {
+        const body = new FormData
+
+        body.append('message', this.state.writing)
+        body.append('user', 'client')
+
+        this.api('post', 'create-message', body).then(data => {
+            const messages = []
+            for(let x in data.data) {
+                messages.unshift(data.data[x])
+            }
+
+            setTimeout(() => {
+                this.setState({ messages: messages })
+            }, 500)
+            this.clear()
+        })
+        
+        return
+    }
+
+    /**
      * Função utiliza para testes
      */
     test() {
         console.log('a')
     }
-    
+
     render() {
         return(
             <div className='chat' onLoad={this.start()}>
@@ -115,7 +155,9 @@ class Chat extends Component {
                     {this.renderMessages()}
                 </div>
 
-                <Writer />
+                <div className='writer'>
+                    <input type="text" name="message" id="writer" placeholder="Digite..." value={this.state.writing} onChange={ e => this.writing(e) } onKeyDown={(e) => this.enter(e)}/>
+                </div>
             </div>
         )
     }

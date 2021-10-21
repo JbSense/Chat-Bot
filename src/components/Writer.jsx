@@ -11,7 +11,6 @@ const initialState = {
 }
 
 class Writer extends Component {
-
     /**
      * Seta o state com initialState
      */
@@ -68,6 +67,12 @@ class Writer extends Component {
         return msg
     }
 
+    /**
+     * Faz validações sobre a mensagem enviada
+     * 
+     * @param {string} message - a mensagem enviada 
+     * @returns true caso as validações sejam cumpridas e false caso falhe em alguma validação
+     */
     validateMessage(message) {
         if(message != '') { return true }
     }
@@ -84,13 +89,12 @@ class Writer extends Component {
     
             const config = {
                 method: 'post',
-                url: 'http://localhost:8080/api/new-message',
+                url: 'http://localhost:8080/api/create-message',
                 data: body,
                 headers: { "Content-Type": "multipart/form-data" }
             }
     
-            axios(config).then(response => {     
-                console.log(response.data)
+            axios(config).then(response => {
                 this.clear()
             })
         }

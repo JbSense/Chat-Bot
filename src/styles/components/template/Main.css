@@ -2,9 +2,10 @@
     width: 80%;
     max-width: 1400px;
     height: 90%;
-    background-color: #0e0e0e;
-    opacity: 90%;
-    border-radius: 8px;
+    background-color: #000;
+    /* background-color: #0e0e0e; */
+    /* opacity: 90%; */
+    border-radius: 10px;
 
     display: grid;
     grid-template-columns: 1fr 60% 1fr;
