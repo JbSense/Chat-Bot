@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "backend", "backend\backend.pyproj", "{BD5BBCB6-822F-4153-B64B-3297DB4E2413}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD5BBCB6-822F-4153-B64B-3297DB4E2413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5BBCB6-822F-4153-B64B-3297DB4E2413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5BBCB6-822F-4153-B64B-3297DB4E2413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5BBCB6-822F-4153-B64B-3297DB4E2413}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F043F16-D1DE-44D7-B73E-5EA2D57BDA2C}
+	EndGlobalSection
+EndGlobal
