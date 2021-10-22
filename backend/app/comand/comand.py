@@ -15,7 +15,7 @@ class Comand(object):
 
         if req["request"] in cmds: return Response.badResponse()
 
-        query = Comands(request=Format.formatString(req["request"]), response=req["response"])
+        query = Comands(request=req["request"], response=req["response"])
         query.save()
 
         return Response.goodResponse(Comand.getComands())
@@ -31,7 +31,7 @@ class Comand(object):
         c = 0
 
         for x in Comands.objects.all():
-            obj[c] = {"request": x.request, "response": x.response}
+            obj[c] = {"request": x.request}
             c += 1
 
         return obj
@@ -41,6 +41,7 @@ class Comand(object):
     """
     def getComandResponse(req):
         for x in Comands.objects.all():
-            if Format.formatString(req) == x.request: return x.response
+            if Format.formatString(req["request"]) == x.request: 
+              return Response.goodResponse({ "response": x.response })
 
-        return "Desculpe mas não sou capaz de lhe responder isso"
+        return Response.goodResponse({ "response": None })

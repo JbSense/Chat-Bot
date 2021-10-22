@@ -12,6 +12,8 @@ urlpatterns = [
     path('api/get-messages', views.get_messages), # Redireciona para a view que obtém as mensagens enviadas
     path('api/create-comand', views.create_comand), # Redireciona para a view que cadastra um novo comando
     path('api/get-comands', views.get_comands), # Redireciona para a view que obtém os comandos já cadastrados
+    path('api/get-response', views.get_response), # Redireciona para a view que obtém a resposta da mensagem
+    path('api/get-system', views.get_system), # Redireciona para a view que obtém os dados do sistema
     path('api/check-status', views.checkState), # Redireciona para a view que faz a checagem do status do banco
     path('api/set-status', views.setState) # Redireciona para a view que seta o status do banco
 ]

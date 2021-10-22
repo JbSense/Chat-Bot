@@ -8,6 +8,8 @@ from app.message.Message import Message
 from app.response.response import Response
 from app.state.state import State
 from app.validation.validation import Validation
+import socket
+import platform
 
 def home(request):
     return JsonResponse({"ola": "mundo"})
@@ -54,7 +56,27 @@ def create_comand(req):
   * Retorna um json response
 """
 def get_comands(req):
-    pass
+  return Response.goodResponse(Comand.getComands())
+
+
+def get_response(req):
+  if Validation.method(req, "POST") == False: return Response.badResponse()
+  if Validation.noParams(req.POST) == False: return Response.badResponse()
+  if Validation.params(req.POST, ["request"]) != True: return Response.badResponse()
+
+  return Comand.getComandResponse(req.POST)
+
+
+def get_system(req):
+  if Validation.method(req, "GET") == False: return Response.badResponse()
+
+  system = {
+          "ip": socket.gethostbyname(socket.gethostname()),
+          "platform": platform.platform(),
+          "architecture": platform.architecture()
+        }
+
+  return Response.goodResponse(system)
 
 
 def checkState(req):

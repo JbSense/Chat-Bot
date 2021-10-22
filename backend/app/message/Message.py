@@ -20,15 +20,7 @@ class Message(object):
         else:
             return Response.badResponse()
 
-        if req["user"] == "client":
-            Message.createMessage({"user": "bot", "message": Comand.getComandResponse(req["message"])})
-
-            return Response.goodResponse(Message.getMessages())
-
-        else:
-            return
-
-
+        return Response.goodResponse(Message.getMessages())
 
     """ 
       * Obtém o histórico de mensagens
